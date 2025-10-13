@@ -87,6 +87,12 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
       additionalLanguages: ["ruby", "bash", "diff"],
     },
+    algolia: {
+      appId: "DLTIDC3Z0R",
+      apiKey: "715e231046010213465c6e8ca98e603e",
+      indexName: "Documentation",
+      contextualSearch: true,
+    },
   } satisfies Preset.ThemeConfig,
   plugins: ["./src/plugins/tailwind"],
 };
