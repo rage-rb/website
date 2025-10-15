@@ -89,6 +89,37 @@ end
 
 Now all purchases log the same message ("processing purchase"), with the variable data stored as structured keys. This allows you to easily search for all purchase logs and filter by specific user IDs or product IDs.
 
+## Extending Request Logs
+
+By default, Rage logs each request with standard information like HTTP method, path, controller, action, status code, and duration. You can enrich these logs with custom data by defining the `append_info_to_payload` method in your controllers.
+
+### Adding Custom Keys
+
+Define `append_info_to_payload` in a specific controller to enrich only that controller's logs, or in `ApplicationController` to apply the change globally:
+
+```ruby title="app/controllers/application_controller.rb"
+class ApplicationController < RageController::API
+  private
+
+  def append_info_to_payload(payload)
+    payload[:tenant_id] = current_tenant.id
+  end
+end
+```
+
+Now, request logs will include the additional `tenant_id` key:
+
+```
+[0c374wet9vquk00t] timestamp=2025-09-19T11:12:56+00:00 pid=1825 level=info method=GET path=/ controller=UsersController action=index tenant_id=123 status=200 duration=1.39
+```
+
+### Common Use Cases
+
+- Multi-tenant applications (adding `tenant_id` or `account_id`)
+- User tracking (adding `user_id` for authenticated requests)
+- Request tracing (adding correlation IDs from clients)
+- Performance monitoring (adding custom timing metrics)
+
 ## Environment-Specific Code
 
 Use `Rage.env` to write environment-aware code. This is particularly useful for enabling development features or test helpers that shouldn't run in production.
