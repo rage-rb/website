@@ -188,15 +188,15 @@ export default function CodeExamples() {
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 bg-gradient-to-br from-slate-50 to-white dark:from-zinc-800 dark:to-zinc-900 rounded-xl border border-slate-200 dark:border-zinc-700">
-              <div className="text-3xl font-bold text-rage-500 mb-2">100%</div>
+              <div className="text-3xl font-bold text-rage-500 dark:text-rage-600 mb-2">100%</div>
               <div className="text-sm text-slate-600 dark:text-zinc-400">Rails Compatibility</div>
             </div>
             <div className="p-6 bg-gradient-to-br from-slate-50 to-white dark:from-zinc-800 dark:to-zinc-900 rounded-xl border border-slate-200 dark:border-zinc-700">
-              <div className="text-3xl font-bold text-rage-500 mb-2">100%</div>
+              <div className="text-3xl font-bold text-rage-500 dark:text-rage-600 mb-2">100%</div>
               <div className="text-sm text-slate-600 dark:text-zinc-400">Rails Productivity</div>
             </div>
             <div className="p-6 bg-gradient-to-br from-slate-50 to-white dark:from-zinc-800 dark:to-zinc-900 rounded-xl border border-slate-200 dark:border-zinc-700">
-              <div className="text-3xl font-bold text-rage-500 mb-2">0ms</div>
+              <div className="text-3xl font-bold text-rage-500 dark:text-rage-600 mb-2">0ms</div>
               <div className="text-sm text-slate-600 dark:text-zinc-400">I/O Blocking Time</div>
             </div>
           </div>

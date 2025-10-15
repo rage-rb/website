@@ -107,15 +107,15 @@ export default function UseCases() {
             </p>
             <div className="flex flex-wrap gap-4 justify-center text-sm">
               <div className="px-6 py-3 bg-slate-50 dark:bg-zinc-800 rounded-lg border border-slate-200 dark:border-zinc-700">
-                <div className="text-rage-500 font-bold text-2xl mb-1">2.6x+</div>
+                <div className="text-rage-500 dark:text-rage-600 font-bold text-2xl mb-1">2.6x+</div>
                 <div className="text-slate-600 dark:text-zinc-400">Improved Throughput</div>
               </div>
               <div className="px-6 py-3 bg-slate-50 dark:bg-zinc-800 rounded-lg border border-slate-200 dark:border-zinc-700">
-                <div className="text-rage-500 font-bold text-2xl mb-1">100%</div>
+                <div className="text-rage-500 dark:text-rage-600 font-bold text-2xl mb-1">100%</div>
                 <div className="text-slate-600 dark:text-zinc-400">API Compatible</div>
               </div>
               <div className="px-6 py-3 bg-slate-50 dark:bg-zinc-800 rounded-lg border border-slate-200 dark:border-zinc-700">
-                <div className="text-rage-500 font-bold text-2xl mb-1">0</div>
+                <div className="text-rage-500 dark:text-rage-600 font-bold text-2xl mb-1">0</div>
                 <div className="text-slate-600 dark:text-zinc-400">Learning Curve</div>
               </div>
             </div>
