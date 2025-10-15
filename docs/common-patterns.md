@@ -1,3 +1,7 @@
+---
+toc_max_heading_level: 2
+---
+
 # Common Patterns
 
 This guide covers common patterns and best practices for building applications with Rage.
