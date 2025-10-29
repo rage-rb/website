@@ -8,6 +8,7 @@ const sidebars: SidebarsConfig = {
     "openapi",
     "deferred",
     "websockets",
+    "event-system",
     "rspec",
     "rails",
     "common-patterns",

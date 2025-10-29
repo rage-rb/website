@@ -1,3 +1,7 @@
+---
+toc_max_heading_level: 2
+---
+
 # API Reference
 
 Complete technical documentation for all Rage framework classes and modules.
@@ -53,6 +57,16 @@ Work with Ruby fibers for lightweight concurrency.
 
 ### [Deferred](https://rage-rb.pages.dev/Rage/Deferred)
 Handle deferred execution and asynchronous operations.
+
+---
+
+## Events
+
+### [Events](https://rage-rb.pages.dev/Rage/Events)
+Build event-driven applications with the Rage event system.
+
+### [Subscriber](https://rage-rb.pages.dev/Rage/Events/Subscriber/ClassMethods)
+Subscribe to and handle application events.
 
 ---
 
