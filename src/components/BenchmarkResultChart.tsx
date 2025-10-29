@@ -19,18 +19,36 @@ echarts.use([
   CanvasRenderer
 ])
 
-const BenchmarkResultChart = ({ title, units, railsVal, rageVal, isLog, datalabels }) => {
+const BenchmarkResultChart = ({ title, units, xAxis = ["Rails", "Rage"], values, datalabels, isLog = false, rotateLabels = false }) => {
     const chartRef = useRef()
     const { colorMode } = useColorMode()
 
     // https://echarts.apache.org/en/option.html#series-bar.label.formatter
     const formatterOpts = datalabels && { formatter: (params => datalabels[params.dataIndex]) }
 
+    const labelOpts = rotateLabels && { axisLabel: { interval: 0, rotate: 30 } }
+
     useEffect(() => {
+      const data = values.map((value, i) => {
+        let background
+
+        if (xAxis[i].includes("Rage")) {
+          background = colorMode === "light" ? "#ef4444" : "#dc2626"
+        } else {
+          background = colorMode === "light" ? "#b0b0b0" : "#666565"
+        }
+
+        return {
+          value,
+          itemStyle: { color: background },
+        }
+      })
+
       const options = {
         xAxis: {
           type: "category",
-          data: ["Rails", "Rage"],
+          data: xAxis,
+          ...labelOpts,
         },
         yAxis: {
           type: isLog ? "log" : "value",
@@ -45,21 +63,8 @@ const BenchmarkResultChart = ({ title, units, railsVal, rageVal, isLog, datalabe
               fontStyle: "bold",
               ...formatterOpts,
             },
-            data: [
-              {
-                value: railsVal,
-                itemStyle: {
-                  color: colorMode === "light" ? "#b0b0b0" : "#666565"
-                }
-              },
-              {
-                value: rageVal,
-                itemStyle: {
-                  color: colorMode === "light" ? "#ef4444" : "#dc2626"
-                }
-              },
-            ],
-            type: "bar"
+            type: "bar",
+            data,
           }
         ],
         title: {

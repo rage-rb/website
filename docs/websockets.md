@@ -363,7 +363,7 @@ end
   <BenchmarkResultChart
     title="Successful connections"
     units="count"
-    railsVal={6118} rageVal={10000}
+    values={[6118, 10000]}
     datalabels={["6,118", "10,000"]}
   />
 </div>
@@ -373,8 +373,7 @@ end
     <BenchmarkResultChart
       title="p95 Message Latency"
       units="ms"
-      railsVal={79000}
-      rageVal={97}
+      values={[79000, 97]}
       datalabels={["1m19s", "97ms"]}
       isLog={true}
     />
@@ -383,8 +382,7 @@ end
     <BenchmarkResultChart
       title="p95 Time to Connect"
       units="ms"
-      railsVal={60000}
-      rageVal={3.98}
+      values={[60000, 3.98]}
       datalabels={["1m", "3.98ms"]}
       isLog={true}
     />
@@ -396,8 +394,7 @@ end
     <BenchmarkResultChart
       title="CPU Utilization"
       units="%"
-      railsVal={100}
-      rageVal={54}
+      values={[100, 54]}
       datalabels={["100%", "54%"]}
     />
   </div>
@@ -405,8 +402,7 @@ end
     <BenchmarkResultChart
       title="Memory Usage"
       units="MB"
-      railsVal={683}
-      rageVal={278}
+      values={[683, 278]}
       datalabels={["683MB", "278MB"]}
     />
   </div>
