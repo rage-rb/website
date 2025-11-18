@@ -50,7 +50,7 @@ With this change, both requests execute concurrently. If each request takes 1 se
 :::info
 Many developers think of fibers as "lightweight threads" that require fiber pools, similar to thread pools for threads.
 
-Instead, treat fibers as regular Ruby objects. Just as we create arrays on demand without using an "array pool," you can create fibers freely and let Ruby and the garbage collector manage them.
+Instead, treat fibers as regular Ruby objects. Just as we create arrays on demand without using an "array pool", you can create fibers freely and let Ruby and the garbage collector manage them.
 :::
 
 ## Structured Logging

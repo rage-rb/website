@@ -77,7 +77,7 @@ end
 However, such an approach can be error-prone and difficult to scale. What if multiple subscribers need to listen to this same set of events? Instead, define the events with a common parent:
 
 ```ruby {2-3,7,11,15}
-# Create the module that defines shared behavior
+# Create a module that defines shared behavior
 module ProductInteractionEvent
 end
 

@@ -63,7 +63,7 @@ This method:
 2. Returns immediately
 3. Executes the task when Rage has available capacity
 
-Logs produced within tasks are automatically tagged with the originating request ID.
+Logs produced within tasks are automatically tagged with the originating request ID and task name.
 
 If a task fails, `Rage::Deferred` automatically retries it up to 5 times, using exponential backoff between attempts.
 
