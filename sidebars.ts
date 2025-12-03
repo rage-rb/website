@@ -11,6 +11,7 @@ const sidebars: SidebarsConfig = {
     "event-system",
     "rspec",
     "rails",
+    "logging",
     "common-patterns",
   ],
 };
