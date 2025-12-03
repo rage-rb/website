@@ -2,13 +2,14 @@
 
 ## Creating a New App
 
-Rage includes a built-in CLI utility that makes it easy to create and set up new applications. To get started, run the following command:
+Rage includes a built-in CLI utility that makes it easy to create and set up new applications. To get started, run the following commands:
 
 ```bash
+gem install rage-rb
 rage new my-app
 ```
 
-This creates a new Rage application in the `my-app` directory with all the necessary files and folder structure.
+This installs Rage and creates a new application in the `my-app` directory with all the necessary files and folder structure.
 
 Next, navigate to your application directory and install the required dependencies:
 
