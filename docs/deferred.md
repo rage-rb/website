@@ -123,7 +123,7 @@ rescue Rage::Deferred::PushTimeout
 end
 ```
 
-See the [configuration documentation](https://rage-rb.pages.dev/Rage/Configuration#label-Deferred+Configuration) for available options.
+See the [configuration documentation](https://rage-rb.pages.dev/Rage/Configuration/Deferred) for available options.
 
 ## Benefits of In-Process Execution
 
