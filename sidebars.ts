@@ -12,6 +12,7 @@ const sidebars: SidebarsConfig = {
     "rspec",
     "rails",
     "logging",
+    "telemetry",
     "common-patterns",
   ],
 };
