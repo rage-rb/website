@@ -48,6 +48,25 @@ Enable Cross-Origin Resource Sharing for your API.
 ### [RequestID Middleware](https://api.rage-rb.dev/Rage/RequestId)
 Mark requests with unique identifiers for logging and debugging.
 
+### [EnqueueMiddlewareInterface](https://api.rage-rb.dev/EnqueueMiddlewareInterface)
+Intercept and modify deferred task enqueueing operations.
+
+### [PerformMiddlewareInterface](https://api.rage-rb.dev/PerformMiddlewareInterface)
+Intercept and modify deferred task execution.
+
+---
+
+## Telemetry
+
+### [Handler](https://api.rage-rb.dev/Rage/Telemetry/Handler)
+Monitor and respond to specific span executions in your application.
+
+### [Spans](https://api.rage-rb.dev/Rage/Telemetry/Spans)
+Telemetry span definitions for tracing framework operations and events.
+
+### [SpanResult](https://api.rage-rb.dev/Rage/Telemetry/SpanResult)
+Access the outcome and status of telemetry span execution.
+
 ---
 
 ## Async & Concurrency
