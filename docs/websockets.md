@@ -35,8 +35,8 @@ Rage automatically forwards the message to all clients connected to that stream.
 
 Refer to the API Documentation for a complete reference of `Rage::Cable` methods:
 
-* [Channel API](https://rage-rb.pages.dev/Rage/Cable/Channel)
-* [Connection API](https://rage-rb.pages.dev/Rage/Cable/Connection)
+* [Channel API](https://api.rage-rb.dev/Rage/Cable/Channel)
+* [Connection API](https://api.rage-rb.dev/Rage/Cable/Connection)
 
 :::
 

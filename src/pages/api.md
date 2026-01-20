@@ -10,77 +10,77 @@ Complete technical documentation for all Rage framework classes and modules.
 
 ## Core Components
 
-### [Controller](https://rage-rb.pages.dev/RageController/API)
+### [Controller](https://api.rage-rb.dev/RageController/API)
 Base controller functionality for handling HTTP requests and responses.
 
-### [Router](https://rage-rb.pages.dev/Rage/Router/DSL/Handler)
+### [Router](https://api.rage-rb.dev/Rage/Router/DSL/Handler)
 Define and manage application routes.
 
-### [Configuration](https://rage-rb.pages.dev/Rage/Configuration)
+### [Configuration](https://api.rage-rb.dev/Rage/Configuration)
 Configure your Rage application settings and environment.
 
 ---
 
 ## HTTP Handling
 
-### [Request](https://rage-rb.pages.dev/Rage/Request)
+### [Request](https://api.rage-rb.dev/Rage/Request)
 Access and manipulate incoming HTTP request data.
 
-### [Response](https://rage-rb.pages.dev/Rage/Response)
+### [Response](https://api.rage-rb.dev/Rage/Response)
 Build and send HTTP responses to clients.
 
-### [Cookies](https://rage-rb.pages.dev/Rage/Cookies)
+### [Cookies](https://api.rage-rb.dev/Rage/Cookies)
 Read and write HTTP cookies.
 
-### [Session](https://rage-rb.pages.dev/Rage/Session)
+### [Session](https://api.rage-rb.dev/Rage/Session)
 Manage user session data across requests.
 
-### [UploadedFile](https://rage-rb.pages.dev/Rage/UploadedFile)
+### [UploadedFile](https://api.rage-rb.dev/Rage/UploadedFile)
 Handle file uploads from multipart form data.
 
 ---
 
 ## Middleware
 
-### [CORS Middleware](https://rage-rb.pages.dev/Rage/Cors)
+### [CORS Middleware](https://api.rage-rb.dev/Rage/Cors)
 Enable Cross-Origin Resource Sharing for your API.
 
-### [RequestID Middleware](https://rage-rb.pages.dev/Rage/RequestId)
+### [RequestID Middleware](https://api.rage-rb.dev/Rage/RequestId)
 Mark requests with unique identifiers for logging and debugging.
 
 ---
 
 ## Async & Concurrency
 
-### [Fiber](https://rage-rb.pages.dev/Fiber)
+### [Fiber](https://api.rage-rb.dev/Fiber)
 Work with Ruby fibers for lightweight concurrency.
 
-### [Deferred](https://rage-rb.pages.dev/Rage/Deferred)
+### [Deferred](https://api.rage-rb.dev/Rage/Deferred)
 Handle deferred execution and asynchronous operations.
 
 ---
 
 ## Events
 
-### [Events](https://rage-rb.pages.dev/Rage/Events)
+### [Events](https://api.rage-rb.dev/Rage/Events)
 Build event-driven applications with the Rage event system.
 
-### [Subscriber](https://rage-rb.pages.dev/Rage/Events/Subscriber/ClassMethods)
+### [Subscriber](https://api.rage-rb.dev/Rage/Events/Subscriber/ClassMethods)
 Subscribe to and handle application events.
 
 ---
 
 ## WebSockets
 
-### [Channel](https://rage-rb.pages.dev/Rage/Cable/Channel)
+### [Channel](https://api.rage-rb.dev/Rage/Cable/Channel)
 Create WebSocket channels for real-time communication.
 
-### [Connection](https://rage-rb.pages.dev/Rage/Cable/Connection)
+### [Connection](https://api.rage-rb.dev/Rage/Cable/Connection)
 Manage WebSocket connection lifecycle and authentication.
 
 ---
 
 ## Utilities
 
-### [Logger](https://rage-rb.pages.dev/Rage/Logger)
+### [Logger](https://api.rage-rb.dev/Rage/Logger)
 Log application messages with configurable levels and formats.

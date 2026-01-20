@@ -123,7 +123,7 @@ rescue Rage::Deferred::PushTimeout
 end
 ```
 
-See the [configuration documentation](https://rage-rb.pages.dev/Rage/Configuration/Deferred) for available options.
+See the [configuration documentation](https://api.rage-rb.dev/Rage/Configuration/Deferred) for available options.
 
 ## Middleware
 
@@ -138,8 +138,8 @@ Use middleware to add context, validate arguments, track metrics, or conditional
 
 Refer to the API Documentation for complete details and examples:
 
-- [Enqueue Middleware](https://rage-rb.pages.dev/EnqueueMiddlewareInterface)
-- [Perform Middleware](https://rage-rb.pages.dev/PerformMiddlewareInterface)
+- [Enqueue Middleware](https://api.rage-rb.dev/EnqueueMiddlewareInterface)
+- [Perform Middleware](https://api.rage-rb.dev/PerformMiddlewareInterface)
 
 :::
 

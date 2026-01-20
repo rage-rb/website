@@ -6,7 +6,7 @@ When a request comes in, Rage's router matches it against your defined routes an
 
 :::info
 
-Refer to the [API Documentation](https://rage-rb.pages.dev/Rage/Router/DSL/Handler) for a complete set of router methods.
+Refer to the [API Documentation](https://api.rage-rb.dev/Rage/Router/DSL/Handler) for a complete set of router methods.
 
 :::
 

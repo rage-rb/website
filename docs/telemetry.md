@@ -54,7 +54,7 @@ Telemetry handlers are passive observers that shouldn't change application behav
 
 ## Registering Handlers
 
-Register your handlers using the [config.telemetry](https://84418cbb.rage-rb.pages.dev/Rage/Configuration/Telemetry) configuration option:
+Register your handlers using the [config.telemetry](https://api.rage-rb.dev/Rage/Configuration/Telemetry) configuration option:
 
 ```ruby title="config/application.rb"
 Rage.configure do
@@ -116,13 +116,13 @@ By adding `request:` to the method signature, the handler now receives the reque
 
 :::info
 
-Refer to the [API Documentation](https://84418cbb.rage-rb.pages.dev/Rage/Telemetry/Spans) for a complete list of available spans and their parameters.
+Refer to the [API Documentation](https://api.rage-rb.dev/Rage/Telemetry/Spans) for a complete list of available spans and their parameters.
 
 :::
 
 ## Handling Errors
 
-When an observed operation fails with an exception, `yield` returns a [SpanResult](https://84418cbb.rage-rb.pages.dev/Rage/Telemetry/SpanResult) object containing the error. This lets you track failures:
+When an observed operation fails with an exception, `yield` returns a [SpanResult](https://api.rage-rb.dev/Rage/Telemetry/SpanResult) object containing the error. This lets you track failures:
 
 ```ruby title="app/telemetry/exception_handler.rb" {5-6}
 class ExceptionHandler < Rage::Telemetry::Handler

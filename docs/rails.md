@@ -110,7 +110,7 @@ Rage has its own middleware stack and **does not** automatically copy Rails midd
 
 :::
 
-Also, let's update the CORS middleware. Initially, the application was using `Rack::Cors`. And while Rage is fully compatible with `Rack::Cors`, for simpler cases it is recommended to use the built-in [Rage::Cors](https://rage-rb.pages.dev/Rage/Cors) middleware.
+Also, let's update the CORS middleware. Initially, the application was using `Rack::Cors`. And while Rage is fully compatible with `Rack::Cors`, for simpler cases it is recommended to use the built-in [Rage::Cors](https://api.rage-rb.dev/Rage/Cors) middleware.
 
 ```diff
 --- a/config/application.rb

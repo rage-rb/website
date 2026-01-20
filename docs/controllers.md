@@ -48,7 +48,7 @@ end
 
 :::info
 
-Refer to the [API Documentation](https://rage-rb.pages.dev/RageController/API) for a complete set of methods available inside controllers.
+Refer to the [API Documentation](https://api.rage-rb.dev/RageController/API) for a complete set of methods available inside controllers.
 
 :::
 

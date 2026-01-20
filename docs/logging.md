@@ -163,7 +163,7 @@ end
 
 The standard Ruby logger is focused on text output, which is why many observability SDKs provide their own interfaces for sending structured logs to their platforms. Rage allows you to pipe its raw structured logging data directly to external observability tools without serializing it to text first.
 
-To do that, pass a callable to the [config.logger](https://rage-rb.pages.dev/Rage/Configuration#logger=-instance_method) configuration option:
+To do that, pass a callable to the [config.logger](https://api.rage-rb.dev/Rage/Configuration#logger=-instance_method) configuration option:
 
 ```ruby {8}
 class MyExternalLogger
@@ -177,7 +177,7 @@ Rage.configure do
 end
 ```
 
-Now, Rage will call the `MyExternalLogger#call` method for every log entry produced by the application. Refer to the [API Documentation](https://rage-rb.pages.dev/ExternalLoggerInterface) for the complete description of the arguments passed to the `#call` method.
+Now, Rage will call the `MyExternalLogger#call` method for every log entry produced by the application. Refer to the [API Documentation](https://api.rage-rb.dev/ExternalLoggerInterface) for the complete description of the arguments passed to the `#call` method.
 
 This feature allows you to match the interface of `Rage::Logger` with the interface of an external observability tool and gives you full control over your logging data.
 
