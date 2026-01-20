@@ -125,6 +125,24 @@ end
 
 See the [configuration documentation](https://rage-rb.pages.dev/Rage/Configuration/Deferred) for available options.
 
+## Middleware
+
+`Rage::Deferred` supports middleware that intercepts task behavior at two points:
+
+- **Enqueue Middleware**: Runs when tasks are added to the queue
+- **Perform Middleware**: Runs when tasks execute
+
+Use middleware to add context, validate arguments, track metrics, or conditionally prevent task execution.
+
+:::info
+
+Refer to the API Documentation for complete details and examples:
+
+- [Enqueue Middleware](https://rage-rb.pages.dev/EnqueueMiddlewareInterface)
+- [Perform Middleware](https://rage-rb.pages.dev/PerformMiddlewareInterface)
+
+:::
+
 ## Benefits of In-Process Execution
 
 Running background tasks in the same process provides several advantages:
