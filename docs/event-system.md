@@ -421,8 +421,8 @@ end
     title="Publishing Overhead"
     units="slower"
     xAxis={["Direct call", "Rage::Events", "dry-events 1.1.0", "Wisper 3.0.0"]}
-    values={[1, 0.5714, 0.2053, 0.1160]}
-    datalabels={["1x", "1.75x", "4.87x", "8.62x"]}
+    values={[1, 0.5181, 0.2053, 0.1160]}
+    datalabels={["1x", "1.93x", "4.87x", "8.62x"]}
     rotateLabels={true}
   />
 </div>
