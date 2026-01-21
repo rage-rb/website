@@ -1,35 +1,35 @@
-import { Gauge, Layers, Wifi, FileCode, Boxes, Sparkles } from 'lucide-react';
+import { Layers, FileCode, Sparkles, Box, Activity, Network } from 'lucide-react';
 
 const features = [
   {
-    icon: Gauge,
-    title: "Blazing Fast Performance",
-    description: "Built on a dedicated runtime with an optimized router, Rage delivers exceptional speed by minimizing overhead and maximizing throughput.",
+    icon: Box,
+    title: "The Single-Process Stack",
+    description: "No Redis to configure. No background workers to manage. No deployment complexity. Your web server, WebSockets, and background jobs all run efficiently in one process."
   },
   {
-    icon: Layers,
-    title: "Rails-Compatible API",
-    description: "Familiar Rails-like syntax and patterns make migration seamless. Write Ruby the way you know, but faster.",
+    icon: Network,
+    title: "Event-Driven by Design",
+    description: "Don't just handle requests — model your domain. A built-in event bus allows you to implement clean Domain-Driven Design out of the box.",
   },
   {
     icon: Sparkles,
     title: "Fiber-Based Concurrency",
-    description: "Non-blocking I/O powered by fibers handles thousands of concurrent requests efficiently, similar to Node.js and Nginx.",
+    description: "Get Node.js levels of concurrency using standard Ruby. The Fiber Scheduler handles the non-blocking I/O while you write clean, synchronous code.",
   },
   {
-    icon: Wifi,
-    title: "Native WebSocket Support",
-    description: "Built-in WebSocket handling for real-time features. Scale to thousands of simultaneous connections without additional dependencies.",
+    icon: Activity,
+    title: "Native WebSockets",
+    description: "Build chat apps, live dashboards, and collaborative tools that scale to thousands of active connections without needing a separate service.",
   },
   {
     icon: FileCode,
     title: "Auto-Generated OpenAPI Docs",
-    description: "Generate OpenAPI documentation directly from your route definitions. Keep your API specs always in sync with your code.",
+    description: "Generate OpenAPI documentation directly from your controllers. Keep your API specs always in sync with your code.",
   },
   {
-    icon: Boxes,
-    title: "Stable & Focused",
-    description: "A narrow, well-defined scope means predictable updates. No major rewrites or breaking changes with every release.",
+    icon: Layers,
+    title: "Rails-Compatible API",
+    description: "Don't relearn web development. Use the router, controllers, and models you know. Migrate critical paths from Rails to Rage in minutes.",
   },
 ];
 
