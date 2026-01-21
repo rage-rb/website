@@ -1,44 +1,44 @@
-import { Server, Rocket, MessageSquare, Workflow } from 'lucide-react';
+import { Radio, ScissorsLineDashed, Server, Workflow } from 'lucide-react';
 
 const useCases = [
   {
-    icon: Server,
-    title: "API-Only Applications",
-    description: "Perfect for building fast, scalable REST APIs. Handle high request volumes with minimal resource usage.",
+    icon: Radio,
+    title: "Live & Streaming Systems",
+    description: "Build live dashboards, AI streaming endpoints, or multiplayer game servers. Handle concurrent API calls efficiently while serving hundreds of other requests.",
     benefits: [
-      "Low latency responses",
-      "Efficient resource utilization",
-      "Auto-generated API documentation",
-    ],
-  },
-  {
-    icon: Rocket,
-    title: "High-Performance Microservices",
-    description: "Build microservices that can handle massive scale. Fiber-based concurrency ensures maximum throughput.",
-    benefits: [
-      "Process hundreds of concurrent requests",
-      "Minimal memory footprint",
-      "Easy horizontal scaling",
-    ],
-  },
-  {
-    icon: MessageSquare,
-    title: "Real-Time Applications",
-    description: "Native WebSocket support for chat apps, live dashboards, and collaborative tools.",
-    benefits: [
-      "Built-in WebSocket handling",
-      "Thousands of simultaneous connections",
-      "Low-latency message delivery",
+      "Zero-dependency WebSockets",
+      "Redis-free Broadcasts",
+      "10k+ Concurrent Connections",
     ],
   },
   {
     icon: Workflow,
-    title: "Rails Integration",
-    description: "Gradually migrate from Rails or use Rage alongside your existing Rails app for performance-critical endpoints.",
+    title: "Event-Driven Architectures",
+    description: "Build clean, maintainable apps with domain events instead of callbacks and service objects. Events trigger subscribers automatically — no manual coordination needed.",
     benefits: [
-      "Rails API compatibility",
-      "Familiar development patterns",
-      "Easy incremental adoption",
+      "First-class Domain Events",
+      "Sync & Async Subscribers",
+      "In-Process Message Bus",
+    ],
+  },
+  {
+    icon: ScissorsLineDashed,
+    title: "Zero-Dependency Microservices",
+    description: "Deploy services with minimal operational complexity. With an in-process background queue and lightweight footprint, you can run a complete platform on a fraction of the usual resources.",
+    benefits: [
+      "Integrated Background Jobs",
+      "No Redis Required",
+      "Minimal RAM Footprint",
+    ],
+  },
+  {
+    icon: Server,
+    title: "High-Throughput Gateways",
+    description: "Aggregate data from multiple upstream services in parallel, reducing total latency. Build fast, scalable REST APIs with automatic OpenAPI docs. Perfect for mobile and SPA backends.",
+    benefits: [
+      "Parallel Request Aggregation",
+      "Non-blocking I/O",
+      "Auto-generated OpenAPI",
     ],
   },
 ];
