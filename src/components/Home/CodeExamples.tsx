@@ -4,47 +4,48 @@ import { Highlight, themes } from 'prism-react-renderer';
 
 const examples = [
   {
-    id: "routing",
-    title: "Rails-compatible Routing",
-    description: "Familiar syntax for defining routes and controllers",
-    code: `# config/routes.rb
-Rage.routes.draw do
-  resources :articles, only: [:index, :create]
-end
-
-# app/controllers/articles_controller.rb
-class ArticlesController < RageController::API
-  def index
-    articles = Article.all
-    render json: articles
-  end
-
-  def create
-    article = Article.create!(title: params[:title], content: params[:content])
-    render json: article, status: :created
-  end
-end`,
-  },
-  {
     id: "fiber",
     title: "Concurrent Request Handling",
     description: "Process multiple operations in parallel with Fiber.await",
     code: `class DashboardController < RageController::API
   def index
-    user, bookings = Fiber.await([
-      Fiber.schedule { Net::HTTP.get(URI("http://users.service/users/#{params[:id]}")) },
-      Fiber.schedule { Net::HTTP.get(URI("http://bookings.service/#{params[:id]}/bookings")) }
+    # Fetch 3 external APIs in parallel. Total time = Max(A, B, C), not Sum(A + B + C).
+    users, stats, alerts = Fiber.await([
+      Fiber.schedule { ExternalAuth.fetch_users },
+      Fiber.schedule { Analytics.fetch_stats },
+      Fiber.schedule { Alerts.check_status }
     ])
 
-    render json: { user:, bookings: }
+    render json: { users:, stats:, alerts: }
   end
 end`,
   },
   {
-    id: "websocket",
-    title: "WebSocket Support",
-    description: "Built-in WebSocket handling for real-time features",
-    code: `class ChatChannel < Rage::Cable::Channel
+    id: "events",
+    title: "Domain Events",
+    description: "Domain events replace callbacks and service objects",
+    code: `# Define events
+OrderPlaced = Data.define(:order_id, :user_id, :total)
+
+# Publish from anywhere
+Rage::Events.publish(OrderPlaced.new(order_id: 123, user_id: 456, total: 99.99))
+
+# Multiple subscribers react independently
+class FraudCheck
+  include Rage::Events::Subscriber
+  subscribe_to OrderPlaced
+
+  def call(event)
+    # Checking fraud...
+  end
+end`,
+  },
+  {
+    id: "background",
+    title: "WebSockets + Background Jobs",
+    description: "Real-time and background processing without external dependencies",
+    code: `# WebSocket channel (no Redis needed)
+class ChatChannel < Rage::Cable::Channel
   def subscribed
     stream_from "chat_\#{params[:room_id]}"
   end
@@ -56,6 +57,15 @@ end`,
       "chat_\#{params[:room_id]}",
       message: message.content
     )
+  end
+end
+
+# Background job (no Sidekiq or Redis needed)
+class ProcessImage
+  include Rage::Deferred::Task
+
+  def perform(image_id)
+    # Runs in the same process, persisted to disk
   end
 end`,
   },
