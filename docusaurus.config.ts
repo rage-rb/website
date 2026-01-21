@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Rage.rb',
-  tagline: 'Fast, Rails-compatible web framework for Ruby',
+  tagline: 'Rage: The Real-Time Ruby Framework',
   favicon: 'img/logo.svg',
 
   // https://docusaurus.io/docs/api/docusaurus-config#future
@@ -55,7 +55,7 @@ const config: Config = {
     metadata: [
       {
         name: "keywords",
-        content: "Ruby web framework, Rails alternative, Ruby fibers, Ruby fiber scheduler, Ruby API framework, Ruby microservices, Ruby WebSocket, Ruby REST API",
+        content: "Ruby web framework, Rails alternative, Ruby fibers, Ruby fiber scheduler, Ruby API framework, Ruby microservices, Ruby WebSocket, Ruby OpenAPI",
       }
     ],
     navbar: {

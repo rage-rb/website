@@ -16,7 +16,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={`${siteConfig.title} - ${siteConfig.tagline}`}
-      description="Fast, Rails-compatible web framework for Ruby with fiber-based concurrency. Build high-performance APIs and real-time applications with familiar syntax."
+      description="Build high-concurrency APIs, WebSockets, and background jobs in a single process. The Rails-compatible framework for modern, real-time architectures."
     >
       <div className="homepage">
         <Hero />

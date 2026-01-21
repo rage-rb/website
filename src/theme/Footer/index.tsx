@@ -22,7 +22,7 @@ function Footer(): ReactNode {
               <span className="text-xl font-bold text-slate-900 dark:text-white">Rage.rb</span>
             </div>
             <p className="text-sm leading-relaxed m-0">
-              Fast, Rails-compatible web framework for Ruby.
+              Fiber-based web framework for Ruby.
             </p>
           </div>
 
