@@ -26,7 +26,7 @@ With Rage, you can take a different approach.
 With `Rage::Events`, when something meaningful happens, you publish an event:
 
 ```ruby
-Rage::Events.publish OrderCreated.new(order:)
+Rage::Events.publish(OrderCreated.new(order:))
 ```
 
 You don't decide who reacts. You don't wire dependencies. You don't modify existing code. You simply state a fact: _"An order was created"._
@@ -73,7 +73,6 @@ You can specialize behavior using inheritance:
 
 ```ruby
 class PriorityOrderCreated < OrderCreated
-  attr_accessor :priority_level
 end
 ```
 
@@ -85,7 +84,7 @@ Using `Rage::Events` involves three steps:
 
 ### 1. Define an Event
 
-An event represents a significant occurrence within your business domain. You can use virtually any Ruby class or module as an event, but the best practice is to use Ruby's standard `Data` class. Instances of `Data` are immutable and support explicit initialization, making them ideal for defining events:
+An event represents a significant occurrence within your business domain. You can use virtually any Ruby class as an event, but the best practice is to use Ruby's standard `Data` class. Instances of `Data` are immutable and support explicit initialization, making them ideal for defining events:
 
 ```ruby
 OrderCreated = Data.define(:order_id, :product_id)
