@@ -96,10 +96,10 @@ export default function CodeExamples() {
   };
 
   return (
-    <section className="py-24 bg-white dark:bg-zinc-900">
+    <section className="py-24 bg-slate-50 dark:bg-zinc-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-zinc-700 text-slate-700 dark:text-zinc-200 rounded-full text-sm font-semibold mb-6">
             <Code2 className="w-4 h-4" />
             Code Examples
           </div>
@@ -120,7 +120,7 @@ export default function CodeExamples() {
                 className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
                   activeTab === example.id
                     ? 'bg-rage-500 dark:bg-rage-600 text-white shadow-md'
-                    : 'bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 hover:bg-slate-200 dark:hover:bg-zinc-700'
+                    : 'bg-slate-200 dark:bg-zinc-700 text-slate-700 dark:text-zinc-200 hover:bg-slate-300 dark:hover:bg-zinc-600'
                 }`}
               >
                 {example.title}
@@ -128,7 +128,7 @@ export default function CodeExamples() {
             ))}
           </div>
 
-          <div className="bg-slate-900 dark:bg-zinc-950 rounded-2xl shadow-2xl overflow-hidden border border-slate-800 dark:border-zinc-900">
+          <div className="bg-slate-900 dark:bg-zinc-950 rounded-2xl shadow-xl dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] overflow-hidden border border-slate-800 dark:border-zinc-700">
             <div className="flex items-center justify-between px-6 py-4 bg-slate-800 border-b border-slate-700 dark:bg-zinc-800 dark:border-zinc-700">
               <div className="flex items-center gap-3">
                 <div className="flex gap-2">

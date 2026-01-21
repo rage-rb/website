@@ -21,8 +21,8 @@ export default function Home(): ReactNode {
       <div className="homepage">
         <Hero />
         <Features />
-        <Benchmarks />
         <CodeExamples />
+        <Benchmarks />
         <UseCases />
         <Timeline />
         <CTA />
