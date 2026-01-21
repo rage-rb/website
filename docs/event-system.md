@@ -2,13 +2,49 @@ import BenchmarkResultChart from "@site/src/components/BenchmarkResultChart";
 
 # Event System
 
-Rage provides a lightweight pub/sub system for implementing patterns like Domain Events or Event Sourcing.
+Most Ruby applications describe **how** things happen. Rage lets you describe **what** happened - and the system responds.
 
-Decoupling different parts of your application through event-based communication makes your code more modular and enables better separation of concerns within your domain. This helps you:
+In a typical application, behavior is hidden inside method calls:
 
-- Keep business logic isolated and testable
-- Add new features without modifying existing code
-- Handle side effects independently of core operations
+```ruby
+def create_order(params)
+  order = Order.create!(params)
+
+  send_confirmation_email(order)
+  update_inventory(order)
+  notify_analytics(order)
+  create_shipment(order)
+end
+```
+
+Each new requirement adds another call. Over time, behavior becomes tangled, implicit, and hard to change.
+
+With Rage, you can take a different approach.
+
+## Events as First-Class Behavior
+
+With `Rage::Events`, when something meaningful happens, you publish an event:
+
+```ruby
+Rage::Events.publish OrderCreated.new(order:)
+```
+
+You don't decide who reacts. You don't wire dependencies. You don't modify existing code. You simply state a fact: _"An order was created"._
+
+Other parts of the system can react to this event:
+
+```ruby
+class SendConfirmationEmail
+  include Rage::Events::Subscriber
+  subscribe_to OrderCreated
+
+  def call(event)
+    # send the confirmation email
+  end
+end
+```
+
+Later, you can add more reactions - analytics, inventory updates, auditing, integrations. None of them require touching the original code. The system grows outward, not inward.
 
 :::info
 
@@ -18,21 +54,46 @@ For distributed systems with inter-service communication, consider dedicated mes
 
 :::
 
+
+### Events Are Objects, Not Hashes
+
+Events in Rage are instances, not hashes:
+
+```ruby
+OrderCreated = Data.define(:order)
+```
+
+This means:
+
+- Events are **typed**
+- Events are **inheritable**
+- Events are **testable**
+
+You can specialize behavior using inheritance:
+
+```ruby
+class PriorityOrderCreated < OrderCreated
+  attr_accessor :priority_level
+end
+```
+
+Handlers can react to a specific event or an entire class of events. This is object-oriented design, applied to system behavior.
+
 ## How It Works
 
 Using `Rage::Events` involves three steps:
 
-### 1. Defining Events
+### 1. Define an Event
 
-An event represents a significant occurrence or state change within your business domain. You can use virtually any Ruby class or module as an event, but the best practice is to use Ruby's standard `Data` class. Instances of `Data` are immutable and support explicit initialization, making them ideal for defining events:
+An event represents a significant occurrence within your business domain. You can use virtually any Ruby class or module as an event, but the best practice is to use Ruby's standard `Data` class. Instances of `Data` are immutable and support explicit initialization, making them ideal for defining events:
 
 ```ruby
 OrderCreated = Data.define(:order_id, :product_id)
 ```
 
-### 2. Defining Subscribers
+### 2. Create Subscribers
 
-A subscriber is a class that includes the `Rage::Events::Subscriber` module, subscribes to events with `subscribe_to`, and implements the `call` method:
+A subscriber is a class that reacts to events. Include `Rage::Events::Subscriber`, declare what you subscribe to, and implement `call`:
 
 ```ruby {2,3,5}
 class UpdateStock
@@ -45,13 +106,15 @@ class UpdateStock
 end
 ```
 
-### 3. Publishing Events
+### 3. Publish Events
 
-To publish an event, use the `Rage::Events.publish` method:
+When something happens, publish the event:
 
 ```ruby
 Rage::Events.publish(OrderCreated.new(order_id: 1, product_id: 2))
 ```
+
+That's it. The system handles the rest.
 
 :::info
 
@@ -61,11 +124,13 @@ Therefore, `Rage::Events.publish` **does not** propagate exceptions from subscri
 
 :::
 
-## Event Hierarchies
+## Event Hierarchies: Model Your Domain
 
-Using the `subscribe_to` call, you can subscribe to any class or module in the event's inheritance chain. This allows you to easily model complex workflows and hide the complexity of handling multiple unrelated side effects.
+You can subscribe to any class or module in an event's inheritance chain. This lets you model complex workflows naturally - without duplicating code or creating brittle dependencies.
 
-For example, let's say the `ProductViewed`, `ProductLiked`, and `ProductAddedToWishlist` events should trigger the `UpdateRecommendations` side effect. Technically, we could subscribe to all three events using `subscribe_to`:
+### The Problem
+
+Say `ProductViewed`, `ProductLiked`, and `ProductAddedToWishlist` should all trigger `UpdateRecommendations`. You could subscribe to each one:
 
 ```ruby {3}
 class UpdateRecommendations
@@ -74,7 +139,11 @@ class UpdateRecommendations
 end
 ```
 
-However, such an approach can be error-prone and difficult to scale. What if multiple subscribers need to listen to this same set of events? Instead, define the events with a common parent:
+But this can be error-prone and difficult to scale. What if you add `ProductShared`? What if multiple subscribers need the same set of events?
+
+### The Solution: Use Inheritance
+
+Define events with a common parent:
 
 ```ruby {2-3,7,11,15}
 # Create a module that defines shared behavior
@@ -95,7 +164,7 @@ ProductAddedToWishlist = Data.define(:product_id) do
 end
 ```
 
-Then, use the module in `subscribe_to`:
+Now subscribe to the module:
 
 ```ruby {3}
 class UpdateRecommendations
@@ -104,16 +173,18 @@ class UpdateRecommendations
 end
 ```
 
-Now adding a new product interaction event is simple - just include the `ProductInteractionEvent` module, and all relevant subscribers will automatically be triggered.
+Adding a new product interaction event is now trivial - just include the module, and all relevant subscribers automatically react.
 
-You can also use a base class to handle all events uniformly. For example, to store all events in the database, define a base class for all events:
+### Handle Everything
+
+You can also subscribe to a base class to handle all events uniformly:
 
 ```ruby
 class ApplicationEvent < Data
 end
 ```
 
-Then, define the events using the base class:
+Use it for your events:
 
 ```ruby {1}
 ProductViewed = ApplicationEvent.define(:product_id) do
@@ -121,7 +192,7 @@ ProductViewed = ApplicationEvent.define(:product_id) do
 end
 ```
 
-And create a subscriber:
+And subscribe to the base class:
 
 ```ruby {3}
 class StoreInDatabase
@@ -134,9 +205,9 @@ class StoreInDatabase
 end
 ```
 
-Ruby's inheritance chain is the foundation of `Rage::Events` - it allows you to naturally define events, share behavior between them, and maintain clear boundaries between events and subscribers.
+Ruby's inheritance chain is the foundation of `Rage::Events`. It allows you to naturally define events, share behavior, and maintain clear boundaries.
 
-Subscribing to parent classes or modules introduces no runtime overhead - subscription lookups are cached, so you can structure your event hierarchies as complex as needed.
+Subscribing to parent classes or modules introduces no runtime overhead - subscription lookups are cached, so you can structure your event hierarchies as complex as needed. 
 
 ## Deferred Subscribers
 
@@ -204,7 +275,7 @@ end
 
 The biggest advantage of event-driven architecture - separation of concerns - is also one of its challenges. While publishers don't need to know about subscribers, developers do.
 
-The `rage events` CLI utility helps you understand what code executes when an event is published by building a tree of event-subscriber relationships.
+The `rage events` CLI makes the implicit explicit. It shows you exactly what happens when an event is published by building a tree of event-subscriber relationships.
 
 Let's say we have the following events:
 
@@ -255,6 +326,25 @@ $ rage events
 │   └─ ApplicationEvent
 │       └─ StoreInDatabase
 ```
+
+## When Should You Use Events?
+
+Events are not for everything.
+
+Use them when:
+
+- **Behavior spans multiple concerns** - sending emails, updating analytics, creating shipments, notifying third parties
+- **Side effects evolve over time** - you want to add features without rewiring logic
+- **You want extensibility** - new reactions shouldn't require modifying existing code
+- **The system should explain itself** - "what happens when X occurs?" should have a clear answer
+
+Don't use them for:
+
+- Simple, single-purpose operations
+- Core business logic with a single responsibility
+- Cases where direct method calls are clearer
+
+If you've ever been afraid to touch a method because you didn't know what it would break - events are for you.
 
 ## Benchmarks
 
