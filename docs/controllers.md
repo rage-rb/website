@@ -150,8 +150,8 @@ end
 
 ```ruby title="app/controllers/user_stats_controller.rb" {1-2}
 class UserStatsController < ApplicationController
-  def show
-    user = User.find(params[:id])
+  def index
+    user = User.find(params[:user_id])
     render json: { signed_up_at: user.signed_up_at, subscription_status: user.subscription_status }
   end
 end
