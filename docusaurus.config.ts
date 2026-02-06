@@ -2,6 +2,20 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+import { visit } from "unist-util-visit";
+
+const removeAnchorLinks = () => (tree) => {
+  visit(tree, "element", (node, index, parent) => {
+    if (
+      node.tagName === "a" &&
+      node.properties?.title?.includes?.("Direct link")
+    ) {
+      parent.children.splice(index, 1);
+      return index;
+    }
+  });
+};
+
 const config: Config = {
   title: 'Rage.rb',
   tagline: 'Rage: The Real-Time Ruby Framework',
@@ -100,7 +114,27 @@ const config: Config = {
       contextualSearch: true,
     },
   } satisfies Preset.ThemeConfig,
-  plugins: ["./src/plugins/tailwind"],
+  plugins: [
+    "./src/plugins/tailwind",
+    [
+      "@signalwire/docusaurus-plugin-llms-txt",
+      {
+        markdown: {
+          relativePaths: false,
+          includePages: true,
+          beforeDefaultRehypePlugins: [removeAnchorLinks],
+        },
+        llmsTxt: {
+          enableLlmsFullTxt: true,
+          includeBlog: false,
+          includePages: true,
+          excludeRoutes: ["/"],
+          siteTitle: "Rage Framework Documentation",
+          siteDescription: "Comprehensive guide to building applications with the Ruby Rage framework",
+        },
+      }
+    ]
+  ],
 };
 
 export default config;

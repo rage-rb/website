@@ -19,6 +19,7 @@
     "@docusaurus/faster": "^3.9.1",
     "@docusaurus/preset-classic": "3.9.1",
     "@mdx-js/react": "^3.0.0",
+    "@signalwire/docusaurus-plugin-llms-txt": "^2.0.0-alpha.7",
     "@tailwindcss/postcss": "^4.1.14",
     "autoprefixer": "^10.4.21",
     "clsx": "^2.0.0",
