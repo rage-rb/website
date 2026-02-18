@@ -126,7 +126,7 @@ const config: Config = {
         },
         llmsTxt: {
           enableLlmsFullTxt: true,
-          includeBlog: false,
+          includeBlog: true,
           includePages: true,
           excludeRoutes: ["/"],
           siteTitle: "Rage Framework Documentation",
