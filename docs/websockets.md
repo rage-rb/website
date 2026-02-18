@@ -288,6 +288,10 @@ RPC-style method calls are **not supported** with the Raw JSON protocol. Use the
 
 :::
 
+## Single-Server, Multi-Worker Setup
+
+If you run a single server with multiple Rage worker processes, you do not need an external backend (such as Redis) for `Rage::Cable` synchronization. Rage workers communicate with each other via IPC, so broadcasts are synchronized between workers on the same server.
+
 ## Multi-Server Setup with Redis
 
 When running `Rage::Cable` across multiple servers, you need a way to synchronize broadcasts between them. The Redis adapter solves this problem.
