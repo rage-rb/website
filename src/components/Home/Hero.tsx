@@ -31,7 +31,7 @@ export default function Hero() {
               className="group inline-flex items-center gap-2 px-8 py-4 bg-rage-500 hover:bg-rage-600 dark:bg-rage-600 dark:hover:bg-rage-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg hover:text-white hover:no-underline"
             >
               <Github className="w-5 h-5" />
-              Veiw on Github
+              View on Github
             </a>
 
             <Link
