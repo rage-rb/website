@@ -44,9 +44,7 @@ This creates a unique message for each combination of inputs, making it difficul
 
 ```ruby
 def process_purchase(user_id:, product_id:)
-  Rage.logger.with_context(user_id: user_id, product_id: product_id) do
-    Rage.logger.info "processing purchase"
-  end
+  Rage.logger.info "processing purchase", user_id: user_id, product_id: product_id
 end
 ```
 
