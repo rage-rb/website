@@ -23,3 +23,14 @@ npm run build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+## Cloudflare Pages Markdown Negotiation
+
+This repo includes a Pages Function at `functions/[[path]].js` that checks for
+`Accept: text/markdown` and, when available, serves the generated `.md` version
+of the same route (for example, `/docs/intro` -> `/docs/intro.md`).
+The site also ships `static/_headers`, so all responses include:
+
+```txt
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
+```
