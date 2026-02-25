@@ -170,3 +170,204 @@ RSpec.describe "Photos API", type: :request do
   end
 end
 ```
+
+## Testing Rage::Cable
+
+Rage provides RSpec helpers for testing WebSocket channels. These helpers are similar to Rails Action Cable testing helpers with minor differences.
+
+### Available Methods
+
+#### Connection Helpers
+
+```ruby
+connect(path, headers: {})  # Emulate a WebSocket connection
+stub_connection(identifiers) # Stub connection identifiers
+```
+
+#### Channel Helpers
+
+```ruby
+subscribe(params = {})       # Subscribe to the channel
+perform(action, data = {})   # Perform a channel action
+```
+
+#### Matchers
+
+```ruby
+expect(subscription).to be_confirmed
+expect(subscription).to have_stream_from("stream_name")
+expect(subscription).to have_stream_for(model)
+
+expect(connection).to be_rejected
+```
+
+#### Accessors
+
+```ruby
+subscription   # The current subscription instance
+transmissions  # Array of messages transmitted to the client
+connection     # The current connection instance
+```
+
+### Testing Subscriptions
+
+Test that a channel correctly subscribes and sets up streams:
+
+```ruby title="spec/channels/chat_channel_spec.rb"
+require "rage/rspec"
+
+RSpec.describe ChatChannel, type: :channel do
+  let(:user) { create(:user) }
+
+  it "subscribes to the channel" do
+    stub_connection(current_user: user)
+    subscribe(room_id: 42)
+
+    expect(subscription).to be_confirmed
+    expect(subscription).to have_stream_from("chat_room_42")
+  end
+
+  it "streams for a specific model" do
+    stub_connection(current_user: user)
+    subscribe
+
+    expect(subscription).to have_stream_for(user)
+  end
+end
+```
+
+### Testing Transmissions
+
+Test messages sent to the client:
+
+```ruby title="spec/channels/notifications_channel_spec.rb"
+require "rage/rspec"
+
+RSpec.describe NotificationsChannel, type: :channel do
+  it "sends a welcome message on subscribe" do
+    subscribe
+
+    expect(subscription).to be_confirmed
+    expect(transmissions.last).to eq({ "message" => "welcome" })
+  end
+end
+```
+
+### Testing Broadcasts
+
+To test broadcasts, use RSpec's native mocking on `Rage::Cable.broadcast`:
+
+```ruby title="spec/channels/chat_channel_spec.rb"
+require "rage/rspec"
+
+RSpec.describe ChatChannel, type: :channel do
+  it "broadcasts messages to the channel" do
+    subscribe
+
+    expect(Rage::Cable).to receive(:broadcast).with("chat", { message: "hello" })
+    perform :send_message, { message: "hello" }
+  end
+end
+```
+
+:::info
+
+Unlike Rails, Rage does not provide the `have_broadcasted_to` matcher. Use `expect(Rage::Cable).to receive(:broadcast)` instead.
+
+:::
+
+### Testing Channel Actions
+
+Test custom actions defined in your channel:
+
+```ruby title="spec/channels/chat_channel_spec.rb"
+require "rage/rspec"
+
+RSpec.describe ChatChannel, type: :channel do
+  it "broadcasts typing indicator" do
+    subscribe
+
+    expect(Rage::Cable).to receive(:broadcast).with("chat", { status: "typing" })
+    perform :typing
+  end
+
+  it "uses connection identifiers in actions" do
+    stub_connection(current_user: "user_123")
+    subscribe(room_id: 456)
+
+    expect(Rage::Cable).to receive(:broadcast).with("info", { room_id: 456, user: "user_123" })
+    perform :info
+  end
+end
+```
+
+### Testing Connections
+
+Test connection authentication and rejection:
+
+```ruby title="spec/channels/application_cable_spec.rb"
+require "rage/rspec"
+
+RSpec.describe ApplicationCable::Connection, type: :channel do
+  it "connects with valid headers" do
+    connect "/cable", headers: { "Authorization" => "Bearer valid_token" }
+
+    expect(connection).not_to be_rejected
+    expect(connection.current_user).to eq("authenticated_user")
+  end
+
+  it "rejects connections without credentials" do
+    connect "/cable"
+
+    expect(connection).to be_rejected
+  end
+end
+```
+
+### Testing with Cookies and Session
+
+Use `cookies` and `session` helpers to set authentication data:
+
+```ruby title="spec/channels/application_cable_spec.rb"
+require "rage/rspec"
+
+RSpec.describe ApplicationCable::Connection, type: :channel do
+  it "connects with cookies" do
+    cookies["auth_token"] = "abc123"
+    connect "/cable"
+
+    expect(connection).not_to be_rejected
+  end
+
+  it "connects with encrypted cookies" do
+    cookies.encrypted["user_id"] = "999"
+    connect "/cable"
+
+    expect(connection.current_user).to eq("user_999")
+  end
+
+  it "connects with session data" do
+    session[:user_id] = "123"
+    connect "/cable"
+
+    expect(connection.current_user).to eq("123")
+  end
+end
+```
+
+### Testing with Query Parameters
+
+Pass query parameters through the connection path:
+
+```ruby title="spec/channels/application_cable_spec.rb"
+require "rage/rspec"
+
+RSpec.describe ApplicationCable::Connection, type: :channel do
+  it "uses query parameters for identification" do
+    connect "/cable?token=secret123"
+
+    expect(connection).not_to be_rejected
+    expect(connection.current_user).to eq("user_from_token")
+  end
+end
+```
