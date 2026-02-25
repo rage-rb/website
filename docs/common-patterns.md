@@ -138,3 +138,25 @@ public/
 These files will be accessible at:
 - `/config.json`
 - `/docs/index.html`
+
+## Agent Skills
+
+Rage provides official skills for coding agents to help them understand and work with Rage applications effectively. Skills give agents context about Rage-specific patterns, APIs, and best practices.
+
+### Installing Skills
+
+Run the following command in your Rage project directory:
+
+```bash
+rage skills install
+```
+
+This installs agent skills based on the coding agent you use (e.g., Claude Code, Cursor, etc.).
+
+### Updating Skills
+
+To update skills to the latest version:
+
+```bash
+rage skills update
+```
