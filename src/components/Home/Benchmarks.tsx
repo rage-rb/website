@@ -5,15 +5,15 @@ const benchmarks = [
     icon: Cable,
     title: "increased throughput",
     metric: "8.5x",
-    description: "I/O-intensive apps",
+    description: "I/O-bound workloads",
     comparison: "vs Rails",
     color: "from-orange-400 to-rage-500",
   },
   {
     icon: Database,
-    title: "faster response times",
-    metric: "150ms",
-    description: "I/O-intensive apps",
+    title: "lower p95 response times",
+    metric: "40%",
+    description: "I/O-bound workloads",
     comparison: "vs Rails",
     color: "from-emerald-400 to-green-500",
   },
@@ -21,15 +21,15 @@ const benchmarks = [
     icon: Cpu,
     title: "increased throughput",
     metric: "2.6x",
-    description: "CPU-intensive apps",
+    description: "Ruby-layer dominant workloads",
     comparison: "vs Rails",
     color: "from-blue-400 to-indigo-500",
   },
   {
     icon: Zap,
-    title: "faster response times",
-    metric: "80ms",
-    description: "CPU-intensive apps",
+    title: "lower p95 response times",
+    metric: "30%",
+    description: "Ruby-layer dominant workloads",
     comparison: "vs Rails",
     color: "from-rage-500 to-rage-600",
   },
@@ -48,7 +48,7 @@ export default function Benchmarks() {
             Designed for Speed
           </h2>
           <p className="text-xl text-slate-600 dark:text-zinc-400 max-w-3xl mx-auto">
-            Real-world benchmarks show significant performance improvements over both I/O- and CPU-intensive Rails applications.
+            Real-world load tests show significantly better throughput and tail latency compared to Rails when applications are under sustained heavy load.
           </p>
         </div>
 
@@ -87,6 +87,10 @@ export default function Benchmarks() {
             );
           })}
         </div>
+
+        <p className="mt-8 text-center text-xs text-slate-500 dark:text-zinc-500">
+          Measurements taken under sustained heavy load on identical hardware. Results reflect reduced degradation under saturation — not single-request latency improvements.
+        </p>
       </div>
     </section>
   );
