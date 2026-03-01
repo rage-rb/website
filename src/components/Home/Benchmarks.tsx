@@ -48,7 +48,7 @@ export default function Benchmarks() {
             Designed for Speed
           </h2>
           <p className="text-xl text-slate-600 dark:text-zinc-400 max-w-3xl mx-auto">
-            Real-world load tests show significantly better throughput and tail latency compared to Rails when applications are under sustained heavy load.
+            Real-world load tests show dramatically improved throughput and tail latency compared to Rails under sustained heavy load.
           </p>
         </div>
 
@@ -90,6 +90,7 @@ export default function Benchmarks() {
 
         <p className="mt-8 text-center text-xs text-slate-500 dark:text-zinc-500">
           Measurements taken under sustained heavy load on identical hardware. Results reflect reduced degradation under saturation — not single-request latency improvements.
+          {" "}<a href="https://www.techempower.com/benchmarks/#section=data-r23&test=db" target="_blank" rel="noopener noreferrer" className="underline decoration-dashed text-slate-500 dark:text-zinc-500 hover:text-slate-700 dark:hover:text-zinc-300">View independent benchmarks →</a>
         </p>
       </div>
     </section>
