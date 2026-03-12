@@ -38,6 +38,12 @@ Manage user session data across requests.
 ### [UploadedFile](https://api.rage-rb.dev/Rage/UploadedFile)
 Handle file uploads from multipart form data.
 
+### [SSE::Message](https://api.rage-rb.dev/Rage/SSE/Message)
+Build Server-Sent Events messages.
+
+### [SSE::ConnectionProxy](https://api.rage-rb.dev/Rage/SSE/ConnectionProxy)
+Low-level interface for SSE connections.
+
 ---
 
 ## Middleware
