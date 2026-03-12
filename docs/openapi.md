@@ -243,6 +243,16 @@ class ApplicationController < RageController::API
 end
 ```
 
+#### Shared Schemes
+
+You can also reference security schemes defined in your [shared components file](#shared-references):
+
+```ruby
+class ApplicationController < RageController::API
+  # @auth #/components/securitySchemes/BasicAuth
+end
+```
+
 ### Responses
 
 `Rage::OpenAPI` provides three ways to document response schemas:
