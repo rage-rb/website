@@ -160,3 +160,7 @@ To update skills to the latest version:
 ```bash
 rage skills update
 ```
+
+## OpenTelemetry
+
+Rage has an official OpenTelemetry integration for distributed tracing and observability. Install the [opentelemetry-instrumentation-rage](https://github.com/rage-rb/opentelemetry-instrumentation) gem to enable automatic instrumentation of your Rage application.
