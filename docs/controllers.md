@@ -52,6 +52,41 @@ Refer to the [API Documentation](https://api.rage-rb.dev/RageController/API) for
 
 :::
 
+### Server-Sent Events
+
+Rage supports rendering Server-Sent Events (SSE) for real-time updates. There are three ways to use SSE:
+
+**Streams via enumerators** - for sending multiple updates over time:
+
+```ruby
+stream = Enumerator.new do |y|
+  "Hello, world!".each_char do |ch|
+    sleep 1
+    y << ch
+  end
+end
+
+render sse: stream
+```
+
+**One-off updates** - for sending a single message:
+
+```ruby
+render sse: { message: "Hello, world!" }
+```
+
+**Low-level access via procs** - for full control over the connection:
+
+```ruby
+render sse: ->(connection) do
+  connection.write("data: Hello, world!\n\n")
+ensure
+  connection.close
+end
+```
+
+With streams and one-off updates, Rage closes the connection automatically. With procs, you manage the connection yourself.
+
 ## Callbacks
 
 Callbacks let you run code before or after an action executes. They're perfect for reducing duplication and implementing cross-cutting concerns like authentication and authorization.
