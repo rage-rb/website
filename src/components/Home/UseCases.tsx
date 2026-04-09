@@ -7,7 +7,7 @@ const useCases = [
     description: "Build live dashboards, AI streaming endpoints, or multiplayer game servers. Handle concurrent API calls efficiently while serving hundreds of other requests.",
     benefits: [
       "Zero-dependency WebSockets",
-      "Redis-free Broadcasts",
+      "Native Stream Responses",
       "10k+ Concurrent Connections",
     ],
   },
