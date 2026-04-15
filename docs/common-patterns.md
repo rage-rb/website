@@ -139,6 +139,60 @@ These files will be accessible at:
 - `/config.json`
 - `/docs/index.html`
 
+## Custom Renderers
+
+Rage allows you to define custom renderers to integrate your preferred templating libraries. This is useful for rendering HTML with libraries like Phlex, Slim, or any other templating system.
+
+### Configuration
+
+Define a custom renderer in your Rage configuration using `config.renderer`. The block executes in the controller context, giving you access to `params`, `headers`, `cookies`, and other controller methods:
+
+```ruby title="config/application.rb"
+Rage.configure do
+  config.renderer(:phlex) do |component, **props|
+    headers["content-type"] = "text/html"
+    component.new(**props).call
+  end
+end
+```
+
+The renderer receives:
+- The first argument passed to `render` (in this case, the component class)
+- Any additional keyword arguments as `**props`
+
+The block's return value becomes the response body.
+
+### Usage
+
+Once configured, use your custom renderer by name in any controller:
+
+```ruby
+class GreetingsController < RageController::API
+  def show
+    render phlex: GreetingComponent, name: params[:name]
+  end
+end
+```
+
+This calls your configured `:phlex` renderer with `GreetingComponent` as the first argument and `name:` as a prop.
+
+### Example: Slim Templates
+
+Here's another example using Slim templates:
+
+```ruby title="config/application.rb"
+Rage.configure do
+  config.renderer(:slim) do |template, **locals|
+    headers["content-type"] = "text/html"
+    Slim::Template.new("app/views/#{template}.slim").render(self, **locals)
+  end
+end
+```
+
+```ruby
+render slim: "users/show", user: @user
+```
+
 ## Agent Skills
 
 Rage provides official skills for coding agents to help them understand and work with Rage applications effectively. Skills give agents context about Rage-specific patterns, APIs, and best practices.
