@@ -304,9 +304,9 @@ When running `Rage::Cable` across multiple servers, you need a way to synchroniz
 
 ### Configuration
 
-Create a `config/cable.yml` file with environment-specific settings:
+Create a `config/pubsub.yml` file with environment-specific settings:
 
-```yaml title="config/cable.yml"
+```yaml title="config/pubsub.yml"
 development:
   adapter: redis
   url: redis://localhost:6379/1
