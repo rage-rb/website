@@ -253,6 +253,43 @@ class ApplicationController < RageController::API
 end
 ```
 
+#### Per-Endpoint Scopes
+
+When using OAuth2 or OpenID Connect with shared security schemes, you can specify per-endpoint scopes using the `@auth_scope` tag. This is useful when different actions require different permission levels.
+
+Reference the security scheme by name:
+
+```ruby
+class ApplicationController < RageController::API
+  before_action :authenticate_user
+  # @auth authenticate_user #/components/securitySchemes/OAuth2
+end
+
+class Api::V1::UsersController < ApplicationController
+  # @auth_scope OAuth2 [read:users]
+  def index
+  end
+
+  # @auth_scope OAuth2 [read:users, write:users]
+  def update
+  end
+end
+```
+
+If your controller uses only one security scheme, you can omit the scheme name:
+
+```ruby
+class Api::V1::UsersController < ApplicationController
+  # @auth_scope [read:users]
+  def index
+  end
+
+  # @auth_scope [read:users, write:users]
+  def update
+  end
+end
+```
+
 ### Responses
 
 `Rage::OpenAPI` provides three ways to document response schemas:
