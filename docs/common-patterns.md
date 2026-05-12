@@ -139,6 +139,62 @@ These files will be accessible at:
 - `/config.json`
 - `/docs/index.html`
 
+## Error Reporting
+
+`Rage::Errors` provides a centralized interface for error reporting across all Rage components. Controllers, deferred tasks, event subscribers, Cable apps, and SSE streams all forward caught exceptions through this interface, eliminating the need to add manual error handling in each location.
+
+### Configuration
+
+Add error reporters to receive exceptions caught by the framework:
+
+```ruby
+Rage.configure do
+  config.error_reporters << MyErrorReporter.new
+end
+```
+
+Each reporter must respond to `call` and accept an exception:
+
+```ruby
+class MyErrorReporter
+  def call(exception)
+    Sentry.capture_exception(exception)
+  end
+end
+```
+
+You can configure multiple reporters, and all will be invoked when an exception occurs.
+
+### Manual Reporting
+
+In rare cases where you need to report an error explicitly:
+
+```ruby
+Rage::Errors.report(exception)
+```
+
+### Best Practices
+
+Errors generally fall into two categories:
+
+**Expected errors** represent flows that can naturally occur in your application. Handle these explicitly and log them:
+
+```ruby
+if !user.valid_password?(params[:password])
+  Rage.logger.error "invalid password when signing in", user_id: user.id
+  # handle the error...
+end
+```
+
+**Unexpected errors** are conditions that shouldn't occur during normal operation. Let the framework catch these and report them through `Rage::Errors`:
+
+```ruby
+# Let database connection errors bubble up
+User.create!(user_params)
+```
+
+This means application code should rarely need to call `Rage::Errors.report` directly - the framework handles unexpected errors automatically.
+
 ## Custom Renderers
 
 Rage allows you to define custom renderers to integrate your preferred templating libraries. This is useful for rendering HTML with libraries like Phlex, Slim, or any other templating system.
