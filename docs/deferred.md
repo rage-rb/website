@@ -16,8 +16,6 @@ All tasks are persisted to a write-ahead log, providing durability and reliabili
 - **Graceful shutdown**: On restart, Rage waits up to 15 seconds for in-progress tasks to complete
 - **No external dependencies**: The default disk-based log works out of the box
 
-Future versions will support Redis and SQL-based logs.
-
 ## When to Use `Rage::Deferred`
 
 `Rage::Deferred` excels at I/O-heavy background tasks:
@@ -65,7 +63,41 @@ This method:
 
 Logs produced within tasks are automatically tagged with the originating request ID and task name.
 
-If a task fails, `Rage::Deferred` automatically retries it up to 5 times, using exponential backoff between attempts.
+If a task fails, `Rage::Deferred` automatically retries it up to 20 times with increasing delays between attempts. The first few retries happen within seconds to minutes, while later retries are spaced hours apart, with the final retry occurring approximately 44 hours after the previous attempt.
+
+### Customizing Retries
+
+To change the maximum number of retries for a task:
+
+```ruby {3}
+class ProcessPayment
+  include Rage::Deferred::Task
+  max_retries 5
+end
+```
+
+For more control, override the `retry_interval` method to implement custom logic. Return an `Integer` to set the retry interval in seconds, `super` to use the default backoff, or `false`/`nil` to abort retries:
+
+```ruby {4-13}
+class ProcessPayment
+  include Rage::Deferred::Task
+
+  def self.retry_interval(exception, attempt:)
+    case exception
+    when TemporaryNetworkError
+      10 # Retry in 10 seconds
+    when InvalidDataError
+      false # Do not retry
+    else
+      super # Default backoff strategy
+    end
+  end
+
+  def perform(payment_id)
+    # ...
+  end
+end
+```
 
 ### Delayed Execution
 
@@ -77,6 +109,18 @@ SayHello.enqueue(name: "World", delay: 10)
 
 # Run at a specific time
 SayHello.enqueue(name: "World", delay_until: Time.now + 10)
+```
+
+### Scheduled Tasks
+
+Define recurring tasks that run on a fixed schedule:
+
+```ruby
+Rage.configure do
+  config.deferred.schedule do
+    every 5.minutes, task: ClearCache
+  end
+end
 ```
 
 ### Wrapping Existing Classes
