@@ -180,9 +180,10 @@ Errors generally fall into two categories:
 **Expected errors** represent flows that can naturally occur in your application. Handle these explicitly and log them:
 
 ```ruby
-if !user.valid_password?(params[:password])
+begin
+  authenticate_user!(user)
+rescue UserNotAuthenticatedError
   Rage.logger.error "invalid password when signing in", user_id: user.id
-  # handle the error...
 end
 ```
 
