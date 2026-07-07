@@ -83,6 +83,9 @@ Work with Ruby fibers for lightweight concurrency.
 ### [Deferred](https://api.rage-rb.dev/Rage/Deferred)
 Handle deferred execution and asynchronous operations.
 
+### [Daemon](https://api.rage-rb.dev/Rage/Daemon)
+Build and manage long-lived background processes.
+
 ---
 
 ## Events
