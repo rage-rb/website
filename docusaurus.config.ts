@@ -18,7 +18,7 @@ const removeAnchorLinks = () => (tree) => {
 
 const config: Config = {
   title: 'Rage.rb',
-  tagline: 'Rage: The Real-Time Ruby Framework',
+  tagline: 'Rage: The Fiber-Based Ruby Framework',
   favicon: 'img/logo.svg',
 
   // https://docusaurus.io/docs/api/docusaurus-config#future

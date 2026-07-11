@@ -11,12 +11,12 @@ export default function Hero() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
         <div className="text-center">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 dark:text-white mb-6 max-w-5xl mx-auto leading-tight">
-            The <span className="text-rage-500 dark:text-rage-600">Real-Time</span> Ruby Framework
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 dark:text-white mb-6 max-w-6xl mx-auto leading-tight">
+            The <span className="text-rage-500 dark:text-rage-600">Fiber-Based</span> Ruby Framework
           </h1>
 
           <p className="text-xl sm:text-2xl text-slate-600 dark:text-zinc-200 mb-4 max-w-3xl mx-auto font-medium">
-            Rails-compatible. Zero-dependency. All in one process.
+            More capabilities. Less infrastructure.
           </p>
 
           <p className="text-lg sm:text-xl text-slate-500 dark:text-zinc-400 mb-12 max-w-2xl mx-auto">
