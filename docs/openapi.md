@@ -401,7 +401,7 @@ Blueprint classes that reference each other are supported. When the same bluepri
 
 #### Dynamic Associations
 
-If an association's `blueprint:` is defined as a `Proc` rather than a class reference (Blueprinter's lazy-resolution pattern), `Rage::OpenAPI` can't statically resolve it and falls back to a generic, untyped object schema for that association.
+If an association's `blueprint:` is a `Proc` rather than a direct class reference, `Rage::OpenAPI` can't resolve it statically and falls back to a generic, untyped object schema for that association.
 
 #### Views
 
