@@ -312,7 +312,7 @@ For complex or reusable schemas, use [shared references](#shared-references).
 
 #### 3. Automatic Schema Generation
 
-`Rage::OpenAPI` can automatically generate schemas from ActiveRecord models or [Alba](https://github.com/okuramasafumi/alba) serializers.
+`Rage::OpenAPI` can automatically generate schemas from ActiveRecord models, [Alba](https://github.com/okuramasafumi/alba) serializers, or [Blueprinter](https://github.com/procore-oss/blueprinter) resources.
 
 Given this Alba resource:
 
@@ -353,6 +353,57 @@ schema:
 ```
 
 Most Alba features are supported, including associations, key transformations, inheritance, and typed attributes.
+
+Given this Blueprinter blueprint:
+
+```ruby
+class UserResource < Blueprinter::Base
+  fields :id, :name, :email
+end
+```
+
+Reference it in your controller:
+
+```ruby
+class Api::V1::UsersController < ApplicationController
+  # @response UserResource(root: :user)
+  def show
+  end
+end
+```
+
+This generates:
+
+```yaml
+schema:
+  type: object
+  properties:
+    user:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+```
+
+Most Blueprinter features are supported, including associations, views, and blueprint inheritance. Key transformation via transformer classes is not yet supported.
+
+#### Views
+
+Use the `view:` option to reference a non-default view:
+
+```ruby
+class Api::V1::UsersController < ApplicationController
+  # @response UserResource(view: :extended)
+  def show
+  end
+end
+```
+
+`root:` and `view:` can be combined, e.g. `UserResource(root: :user, view: :extended)`.
 
 #### Collections
 
