@@ -196,6 +196,35 @@ User.create!(user_params)
 
 This means application code should rarely need to call `Rage::Errors.report` directly - the framework handles unexpected errors automatically.
 
+## Daemons
+
+Rage provides `Rage::Daemon` for managing long-lived background processes. Use daemons when you need to continuously listen to external services, consume message queues, or run persistent background tasks that should stay alive for the entire application lifetime. The framework automatically handles daemon lifecycle, including startup, crash recovery, and graceful shutdown.
+
+### Creating a Daemon
+
+Subclass `Rage::Daemon` and implement the `#perform` method:
+
+```ruby
+class RedisListener < Rage::Daemon
+  def perform
+    redis = Redis.new
+    redis.subscribe("notifications") do |on|
+      on.message do |channel, message|
+        Rage::Cable.broadcast("notifications", message)
+      end
+    end
+  end
+end
+```
+
+Register daemons in your application configuration:
+
+```ruby title="config/application.rb"
+Rage.configure do
+  config.daemons << RedisListener
+end
+```
+
 ## Custom Renderers
 
 Rage allows you to define custom renderers to integrate your preferred templating libraries. This is useful for rendering HTML with libraries like Phlex, Slim, or any other templating system.
