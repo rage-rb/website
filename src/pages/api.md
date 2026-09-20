@@ -73,6 +73,9 @@ Telemetry span definitions for tracing framework operations and events.
 ### [SpanResult](https://api.rage-rb.dev/Rage/Telemetry/SpanResult)
 Access the outcome and status of telemetry span execution.
 
+### [Capacity](https://api.rage-rb.dev/Rage/Telemetry/Capacity)
+Access runtime metrics for server load and queued connections.
+
 ---
 
 ## Async & Concurrency
